@@ -1,0 +1,22 @@
+
+entity Sale{
+customerId Long,
+grandTotal Double
+} 
+entity TicketLine{
+productId Long,
+quantity Integer,
+price Double,
+total Double
+}
+
+
+
+relationship OneToMany{
+	Sale{ticketLine} to TicketLine
+}
+
+
+service all with serviceImpl
+dto all with mapstruct
+paginate all with pagination
