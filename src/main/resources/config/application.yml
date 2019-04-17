@@ -150,10 +150,10 @@ spring:
 security:
     oauth2:
         client:
-            client-id: internal
-            client-secret: internal
+            client-id: account
+            client-secret: 9dc04b00-55f1-49b5-88fa-21b401e442dd
         resource:
-            user-info-uri: http://localhost:9080/auth/realms/jhipster/protocol/openid-connect/userinfo
+            user-info-uri: http://35.237.193.86:8080/auth/realms/graeshoppe/protocol/openid-connect/userinfo
 
 server:
     servlet:
