@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -109,4 +110,12 @@ public class TicketLineServiceImpl implements TicketLineService {
         return ticketLineSearchRepository.search(queryStringQuery(query), pageable)
             .map(ticketLineMapper::toDto);
     }
+
+	/* (non-Javadoc)
+	 * @see com.diviso.graeshoppe.service.TicketLineService#findBySaleId(java.lang.Long)
+	 */
+	@Override
+	public List<TicketLineDTO> findBySaleId(Long saleId) {
+		return ticketLineMapper.toDto(ticketLineRepository.findBySaleId(saleId));
+	}
 }

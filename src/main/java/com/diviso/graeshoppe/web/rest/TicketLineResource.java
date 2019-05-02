@@ -165,5 +165,9 @@ public class TicketLineResource {
 		return ResponseEntity.ok().headers(headers).body(page.getContent());
 	}
 
+	@GetMapping("/findAllTicketLinesBySaleId/{saleId}")
+	public List<TicketLineDTO> findAllTicketLinesBySaleId(@PathVariable Long saleId){
+		return ticketLineService.findBySaleId(saleId);
+	}
 	
 }
