@@ -6,6 +6,10 @@
             "fieldType": "Long"
         },
         {
+            "fieldName": "date",
+            "fieldType": "Instant"
+        },
+        {
             "fieldName": "grandTotal",
             "fieldType": "Double"
         }

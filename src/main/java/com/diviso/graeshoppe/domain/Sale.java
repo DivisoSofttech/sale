@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -27,6 +28,9 @@ public class Sale implements Serializable {
 
     @Column(name = "customer_id")
     private Long customerId;
+
+    @Column(name = "jhi_date")
+    private Instant date;
 
     @Column(name = "grand_total")
     private Double grandTotal;
@@ -53,6 +57,19 @@ public class Sale implements Serializable {
 
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
+    }
+
+    public Instant getDate() {
+        return date;
+    }
+
+    public Sale date(Instant date) {
+        this.date = date;
+        return this;
+    }
+
+    public void setDate(Instant date) {
+        this.date = date;
     }
 
     public Double getGrandTotal() {
@@ -119,6 +136,7 @@ public class Sale implements Serializable {
         return "Sale{" +
             "id=" + getId() +
             ", customerId=" + getCustomerId() +
+            ", date='" + getDate() + "'" +
             ", grandTotal=" + getGrandTotal() +
             "}";
     }

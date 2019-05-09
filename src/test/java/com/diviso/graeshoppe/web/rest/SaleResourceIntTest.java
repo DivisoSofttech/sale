@@ -28,6 +28,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
 
@@ -51,6 +53,9 @@ public class SaleResourceIntTest {
 
     private static final Long DEFAULT_CUSTOMER_ID = 1L;
     private static final Long UPDATED_CUSTOMER_ID = 2L;
+
+    private static final Instant DEFAULT_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final Double DEFAULT_GRAND_TOTAL = 1D;
     private static final Double UPDATED_GRAND_TOTAL = 2D;
@@ -112,6 +117,7 @@ public class SaleResourceIntTest {
     public static Sale createEntity(EntityManager em) {
         Sale sale = new Sale()
             .customerId(DEFAULT_CUSTOMER_ID)
+            .date(DEFAULT_DATE)
             .grandTotal(DEFAULT_GRAND_TOTAL);
         return sale;
     }
@@ -138,6 +144,7 @@ public class SaleResourceIntTest {
         assertThat(saleList).hasSize(databaseSizeBeforeCreate + 1);
         Sale testSale = saleList.get(saleList.size() - 1);
         assertThat(testSale.getCustomerId()).isEqualTo(DEFAULT_CUSTOMER_ID);
+        assertThat(testSale.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testSale.getGrandTotal()).isEqualTo(DEFAULT_GRAND_TOTAL);
 
         // Validate the Sale in Elasticsearch
@@ -179,6 +186,7 @@ public class SaleResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(sale.getId().intValue())))
             .andExpect(jsonPath("$.[*].customerId").value(hasItem(DEFAULT_CUSTOMER_ID.intValue())))
+            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].grandTotal").value(hasItem(DEFAULT_GRAND_TOTAL.doubleValue())));
     }
     
@@ -194,6 +202,7 @@ public class SaleResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(sale.getId().intValue()))
             .andExpect(jsonPath("$.customerId").value(DEFAULT_CUSTOMER_ID.intValue()))
+            .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
             .andExpect(jsonPath("$.grandTotal").value(DEFAULT_GRAND_TOTAL.doubleValue()));
     }
 
@@ -219,6 +228,7 @@ public class SaleResourceIntTest {
         em.detach(updatedSale);
         updatedSale
             .customerId(UPDATED_CUSTOMER_ID)
+            .date(UPDATED_DATE)
             .grandTotal(UPDATED_GRAND_TOTAL);
         SaleDTO saleDTO = saleMapper.toDto(updatedSale);
 
@@ -232,6 +242,7 @@ public class SaleResourceIntTest {
         assertThat(saleList).hasSize(databaseSizeBeforeUpdate);
         Sale testSale = saleList.get(saleList.size() - 1);
         assertThat(testSale.getCustomerId()).isEqualTo(UPDATED_CUSTOMER_ID);
+        assertThat(testSale.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testSale.getGrandTotal()).isEqualTo(UPDATED_GRAND_TOTAL);
 
         // Validate the Sale in Elasticsearch
@@ -294,6 +305,7 @@ public class SaleResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(sale.getId().intValue())))
             .andExpect(jsonPath("$.[*].customerId").value(hasItem(DEFAULT_CUSTOMER_ID.intValue())))
+            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].grandTotal").value(hasItem(DEFAULT_GRAND_TOTAL.doubleValue())));
     }
 

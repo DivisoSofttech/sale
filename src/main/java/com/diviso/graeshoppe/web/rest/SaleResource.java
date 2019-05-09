@@ -4,8 +4,6 @@ import com.diviso.graeshoppe.web.rest.errors.BadRequestAlertException;
 import com.diviso.graeshoppe.web.rest.util.HeaderUtil;
 import com.diviso.graeshoppe.web.rest.util.PaginationUtil;
 import com.diviso.graeshoppe.service.dto.SaleDTO;
-import com.diviso.graeshoppe.service.mapper.SaleMapper;
-
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,11 +35,9 @@ public class SaleResource {
     private static final String ENTITY_NAME = "salemicroserviceSale";
 
     private final SaleService saleService;
- 
 
     public SaleResource(SaleService saleService) {
         this.saleService = saleService;
-
     }
 
     /**
@@ -140,6 +136,4 @@ public class SaleResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
-    
-    
 }

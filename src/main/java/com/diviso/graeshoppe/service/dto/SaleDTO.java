@@ -1,4 +1,5 @@
 package com.diviso.graeshoppe.service.dto;
+import java.time.Instant;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -10,6 +11,8 @@ public class SaleDTO implements Serializable {
     private Long id;
 
     private Long customerId;
+
+    private Instant date;
 
     private Double grandTotal;
 
@@ -28,6 +31,14 @@ public class SaleDTO implements Serializable {
 
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
+    }
+
+    public Instant getDate() {
+        return date;
+    }
+
+    public void setDate(Instant date) {
+        this.date = date;
     }
 
     public Double getGrandTotal() {
@@ -64,6 +75,7 @@ public class SaleDTO implements Serializable {
         return "SaleDTO{" +
             "id=" + getId() +
             ", customerId=" + getCustomerId() +
+            ", date='" + getDate() + "'" +
             ", grandTotal=" + getGrandTotal() +
             "}";
     }

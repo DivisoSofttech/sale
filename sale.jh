@@ -1,6 +1,6 @@
-
 entity Sale{
 customerId Long,
+date Instant,
 grandTotal Double
 } 
 entity TicketLine{
@@ -9,8 +9,6 @@ quantity Integer,
 price Double,
 total Double
 }
-
-
 
 relationship OneToMany{
 	Sale{ticketLine} to TicketLine
