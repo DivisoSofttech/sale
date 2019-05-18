@@ -26,6 +26,9 @@ public class Sale implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "user_id")
+    private String userId;
+
     @Column(name = "customer_id")
     private Long customerId;
 
@@ -44,6 +47,19 @@ public class Sale implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public Sale userId(String userId) {
+        this.userId = userId;
+        return this;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public Long getCustomerId() {
@@ -135,6 +151,7 @@ public class Sale implements Serializable {
     public String toString() {
         return "Sale{" +
             "id=" + getId() +
+            ", userId='" + getUserId() + "'" +
             ", customerId=" + getCustomerId() +
             ", date='" + getDate() + "'" +
             ", grandTotal=" + getGrandTotal() +

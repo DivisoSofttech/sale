@@ -1,4 +1,5 @@
 entity Sale{
+userId String,
 customerId Long,
 date Instant,
 grandTotal Double

@@ -51,6 +51,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = SalemicroserviceApp.class)
 public class SaleResourceIntTest {
 
+    private static final String DEFAULT_USER_ID = "AAAAAAAAAA";
+    private static final String UPDATED_USER_ID = "BBBBBBBBBB";
+
     private static final Long DEFAULT_CUSTOMER_ID = 1L;
     private static final Long UPDATED_CUSTOMER_ID = 2L;
 
@@ -116,6 +119,7 @@ public class SaleResourceIntTest {
      */
     public static Sale createEntity(EntityManager em) {
         Sale sale = new Sale()
+            .userId(DEFAULT_USER_ID)
             .customerId(DEFAULT_CUSTOMER_ID)
             .date(DEFAULT_DATE)
             .grandTotal(DEFAULT_GRAND_TOTAL);
@@ -143,6 +147,7 @@ public class SaleResourceIntTest {
         List<Sale> saleList = saleRepository.findAll();
         assertThat(saleList).hasSize(databaseSizeBeforeCreate + 1);
         Sale testSale = saleList.get(saleList.size() - 1);
+        assertThat(testSale.getUserId()).isEqualTo(DEFAULT_USER_ID);
         assertThat(testSale.getCustomerId()).isEqualTo(DEFAULT_CUSTOMER_ID);
         assertThat(testSale.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testSale.getGrandTotal()).isEqualTo(DEFAULT_GRAND_TOTAL);
@@ -185,6 +190,7 @@ public class SaleResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(sale.getId().intValue())))
+            .andExpect(jsonPath("$.[*].userId").value(hasItem(DEFAULT_USER_ID.toString())))
             .andExpect(jsonPath("$.[*].customerId").value(hasItem(DEFAULT_CUSTOMER_ID.intValue())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].grandTotal").value(hasItem(DEFAULT_GRAND_TOTAL.doubleValue())));
@@ -201,6 +207,7 @@ public class SaleResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(sale.getId().intValue()))
+            .andExpect(jsonPath("$.userId").value(DEFAULT_USER_ID.toString()))
             .andExpect(jsonPath("$.customerId").value(DEFAULT_CUSTOMER_ID.intValue()))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
             .andExpect(jsonPath("$.grandTotal").value(DEFAULT_GRAND_TOTAL.doubleValue()));
@@ -227,6 +234,7 @@ public class SaleResourceIntTest {
         // Disconnect from session so that the updates on updatedSale are not directly saved in db
         em.detach(updatedSale);
         updatedSale
+            .userId(UPDATED_USER_ID)
             .customerId(UPDATED_CUSTOMER_ID)
             .date(UPDATED_DATE)
             .grandTotal(UPDATED_GRAND_TOTAL);
@@ -241,6 +249,7 @@ public class SaleResourceIntTest {
         List<Sale> saleList = saleRepository.findAll();
         assertThat(saleList).hasSize(databaseSizeBeforeUpdate);
         Sale testSale = saleList.get(saleList.size() - 1);
+        assertThat(testSale.getUserId()).isEqualTo(UPDATED_USER_ID);
         assertThat(testSale.getCustomerId()).isEqualTo(UPDATED_CUSTOMER_ID);
         assertThat(testSale.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testSale.getGrandTotal()).isEqualTo(UPDATED_GRAND_TOTAL);
@@ -304,6 +313,7 @@ public class SaleResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(sale.getId().intValue())))
+            .andExpect(jsonPath("$.[*].userId").value(hasItem(DEFAULT_USER_ID)))
             .andExpect(jsonPath("$.[*].customerId").value(hasItem(DEFAULT_CUSTOMER_ID.intValue())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].grandTotal").value(hasItem(DEFAULT_GRAND_TOTAL.doubleValue())));
