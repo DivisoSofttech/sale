@@ -25,7 +25,7 @@ eureka:
     client:
         service-url:
             defaultZone: https://admin:${jhipster.registry.password}@byta-tech.herokuapp.com/eureka/
-
+        enabled: false
 spring:
     profiles:
         active: dev
