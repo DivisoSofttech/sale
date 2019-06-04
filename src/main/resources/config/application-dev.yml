@@ -74,7 +74,7 @@ spring:
                    data: target/elasticsearch/data
         jest:
            readTimeout: 10000
-           uri: http://35.232.47.105:9200
+           uri: http://35.237.193.86:9200
     liquibase:
         contexts: dev
     mail:
