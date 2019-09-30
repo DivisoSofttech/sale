@@ -42,7 +42,7 @@ ribbon:
         enabled: true
 feign:
     hystrix:
-        enabled: true
+        enabled: false
 #    client:
 #        config:
 #            default:
@@ -151,9 +151,9 @@ security:
     oauth2:
         client:
             client-id: account
-            client-secret: 29a095bc-9ced-480b-a719-4e70ce7dcc49
+            client-secret: 61aed705-1f70-4955-ad23-94bc15c09c29
         resource:
-            user-info-uri: http://35.196.86.249:8080/auth/realms/graeshoppe/protocol/openid-connect/userinfo
+            user-info-uri: http://dev.servers.divisosofttech.com:8888/auth/realms/graeshoppe/protocol/openid-connect/userinfo
 
 server:
     servlet:
