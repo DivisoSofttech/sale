@@ -41,6 +41,34 @@ spring:
     jackson:
         serialization:
             indent-output: true
+    cloud:
+        stream:
+            kafka:
+                binder:
+                    brokers: dev.servers.divisosofttech.com
+                    zk-nodes: dev.servers.divisosofttech.com
+                    configuration:
+                       key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+                       value.serializer: com.diviso.graeshoppe.order.config.SerdeConfig
+            bindings:
+                output:
+                    destination: topic-jhipster
+                order:
+                    destination: order
+                    contentType: application/*+avro
+                    producer:
+                       useNativeEncoding: true
+                notification:
+                    destination: notification
+                    contentType: application/*+avro
+                    producer:
+                       useNativeEncoding: true                       
+            schemaRegistryClient:
+              endpoint: http://dev.servers.divisosofttech.com:8081
+            schema:
+              avro:
+                schema-locations: classpath:avro/order.avsc
+
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
         url: jdbc:mysql://localhost:3306/salemicroservice?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
@@ -66,17 +94,17 @@ spring:
             hibernate.generate_statistics: true
     data:
         elasticsearch:
-           cluster-name: f3289c8240234fd8889f26e665ca3b2e
-           cluster-nodes: https://f3289c8240234fd8889f26e665ca3b2e.asia-northeast1.gcp.cloud.es.io:9243/
+           cluster-name: 3450ea755f534f08ab744634fee6e100
+           cluster-nodes: https://3450ea755f534f08ab744634fee6e100.asia-northeast1.gcp.cloud.es.io:9243
            properties:
                path:
                    logs: target/elasticsearch/log
                    data: target/elasticsearch/data
         jest:
-           password: DqhheG58ZYn8BzoMZg96DJZz
+           password: LWpF8sZBt2VtiKnDXsOuI0Fa
            username: elastic
            readTimeout: 10000
-           uri: https://f3289c8240234fd8889f26e665ca3b2e.asia-northeast1.gcp.cloud.es.io:9243/
+           uri: https://3450ea755f534f08ab744634fee6e100.asia-northeast1.gcp.cloud.es.io:9243
     liquibase:
         contexts: dev
     mail:
