@@ -95,7 +95,8 @@ spring:
     data:
         elasticsearch:
            cluster-name: 3450ea755f534f08ab744634fee6e100
-           cluster-nodes: https://3450ea755f534f08ab744634fee6e100.asia-northeast1.gcp.cloud.es.io:9243
+           cluster-nodes: https://3450ea755f534f08ab744634fee6e100.asia-northeast1.gcp.cloud.es.io:9243/
+
            properties:
                path:
                    logs: target/elasticsearch/log
@@ -104,7 +105,9 @@ spring:
            password: LWpF8sZBt2VtiKnDXsOuI0Fa
            username: elastic
            readTimeout: 10000
-           uri: https://3450ea755f534f08ab744634fee6e100.asia-northeast1.gcp.cloud.es.io:9243
+
+           uri: https://3450ea755f534f08ab744634fee6e100.asia-northeast1.gcp.cloud.es.io:9243/
+
     liquibase:
         contexts: dev
     mail:
