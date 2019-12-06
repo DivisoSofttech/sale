@@ -53,21 +53,17 @@ spring:
             bindings:
                 output:
                     destination: topic-jhipster
-                order:
-                    destination: order
+                sale:
+                    destination: sale
                     contentType: application/*+avro
                     producer:
                        useNativeEncoding: true
-                notification:
-                    destination: notification
-                    contentType: application/*+avro
-                    producer:
-                       useNativeEncoding: true                       
+                     
             schemaRegistryClient:
               endpoint: http://dev.servers.divisosofttech.com:8081
             schema:
               avro:
-                schema-locations: classpath:avro/order.avsc
+                schema-locations: classpath:avro/sale.avsc
 
     datasource:
         type: com.zaxxer.hikari.HikariDataSource

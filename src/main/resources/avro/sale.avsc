@@ -5,20 +5,11 @@
 	"type":"record",
 	"name":"TicketLine",
 	"fields":[
-		{"name":"productId",
-		"type":["null","long"]},
-		
-		{"name":"quantity",
-		"type":["null","int"],
-		"default": "NONE"},
-		
-		{"name":"price",
-		"type":["null","double"],
-		"default": 0.0},
-		
-		{"name":"total",
-		"type":["null","double"],
-		"default": 0.0}
+		{"name":"productId","type":"long"},
+		{"name":"quantity","type":"int"},
+		{"name":"price","type":"double"},
+		{"name":"total","type":"double"}
+
 		]
 	},
 	
@@ -27,26 +18,12 @@
 	"type":"record",
 	"name":"Sale",
 	"fields":[
-		{"name":"userId",
-		"type":["null","string"],
-		"default": null},
-		
-		{"name":"customerId",
-		"type":["null","long"],
-		"default": null},
-		
-		{"name":"date",
-		"type":["null","long"],
-		"default": null},
-		
-		{"name":"grandTotal",
-		"type":["null","double"],
-		"default": 0.0},
-		
+		{"name":"userId","type":"string"},
+		{"name":"customerId","type":"long"},
+		{"name":"date","type":["null","long"],"logicalType":"date","default": null},
+		{"name":"grandTotal","type":"double"},
 		{"name":"ticketLines","type":{"type":"array","items":"com.diviso.graeshoppe.avro.TicketLine"}}
-		]
+	]
 	}
-	
-
 	
 ]

@@ -144,10 +144,12 @@ public class SaleServiceImpl implements SaleService {
 				.setDate(sale.getDate().toEpochMilli())
 				.setGrandTotal(sale.getGrandTotal())
 				.setUserId(sale.getUserId())
+		
 				.setTicketLines(sale.getTicketLines().stream()
 		  .map(this::toAvroTicketLine).collect(Collectors.toList()));
 		 
 		com.diviso.graeshoppe.avro.Sale message =saleAvro.build();
+		
 		log.info("+++++++++++++++++++++++++++++++ completed publish");
 		return messageChannel.saleOut().send(MessageBuilder.withPayload(message).build());
 
