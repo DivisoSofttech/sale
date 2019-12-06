@@ -148,7 +148,7 @@ public class SaleServiceImpl implements SaleService {
 		  .map(this::toAvroTicketLine).collect(Collectors.toList()));
 		 
 		com.diviso.graeshoppe.avro.Sale message =saleAvro.build();
-		log.info("+++++++++++++++++++++++++++++++"+message);
+		log.info("+++++++++++++++++++++++++++++++ completed publish");
 		return messageChannel.saleOut().send(MessageBuilder.withPayload(message).build());
 
 	}
