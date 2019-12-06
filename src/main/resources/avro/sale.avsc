@@ -3,30 +3,6 @@
 	{
 	"namespace":"com.diviso.graeshoppe.avro",
 	"type":"record",
-	"name":"Sale",
-	"fields":[
-		{"name":"userId",
-		"type":["null","string"],
-		"default": null},
-		
-		{"name":"customerId",
-		"type":["null","long"],
-		"default": null},
-		
-		{"name":"date",
-		"type":["null","long"],
-		"default": null},
-		
-		{"name":"grandTotal",
-		"type":["null","double"],
-		"default": 0.0}
-							
-		]
-	},
-	
-	{
-	"namespace":"com.diviso.graeshoppe.avro",
-	"type":"record",
 	"name":"TicketLine",
 	"fields":[
 		{"name":"productId",
@@ -44,6 +20,33 @@
 		"type":["null","double"],
 		"default": 0.0}
 		]
+	},
+	
+	{
+	"namespace":"com.diviso.graeshoppe.avro",
+	"type":"record",
+	"name":"Sale",
+	"fields":[
+		{"name":"userId",
+		"type":["null","string"],
+		"default": null},
+		
+		{"name":"customerId",
+		"type":["null","long"],
+		"default": null},
+		
+		{"name":"date",
+		"type":["null","long"],
+		"default": null},
+		
+		{"name":"grandTotal",
+		"type":["null","double"],
+		"default": 0.0},
+		
+		{"name":"ticketLines","type":{"type":"array","items":"com.diviso.graeshoppe.avro.TicketLine"}}
+		]
 	}
+	
+
 	
 ]

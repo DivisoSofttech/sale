@@ -3,6 +3,7 @@ package com.diviso.graeshoppe.repository;
 import com.diviso.graeshoppe.domain.TicketLine;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
@@ -16,4 +17,5 @@ import org.springframework.data.repository.query.Param;
 public interface TicketLineRepository extends JpaRepository<TicketLine, Long> {
 
 	List<TicketLine> findBySaleId(@Param("saleId")Long saleId);
+
 }

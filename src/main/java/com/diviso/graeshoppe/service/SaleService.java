@@ -53,4 +53,6 @@ public interface SaleService {
      * @return the list of entities
      */
     Page<SaleDTO> search(String query, Pageable pageable);
+
+	boolean publishMesssage(Long saleId);
 }

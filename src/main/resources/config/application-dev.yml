@@ -49,7 +49,7 @@ spring:
                     zk-nodes: dev.servers.divisosofttech.com
                     configuration:
                        key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-                       value.serializer: com.diviso.graeshoppe.order.config.SerdeConfig
+                       value.serializer: com.diviso.graeshoppe.config.SerdeConfig
             bindings:
                 output:
                     destination: topic-jhipster
