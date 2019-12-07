@@ -9,7 +9,7 @@ import com.diviso.graeshoppe.repository.TicketLineRepository;
 import com.diviso.graeshoppe.repository.search.SaleSearchRepository;
 import com.diviso.graeshoppe.service.dto.SaleDTO;
 import com.diviso.graeshoppe.service.mapper.SaleMapper;
-import com.diviso.graeshoppe.avro.Sale.Builder;
+import com.diviso.graeshoppe.avro.SaleMessage.Builder;
 import com.diviso.graeshoppe.config.MessageBinderConfiguration;
 
 import org.slf4j.Logger;
@@ -128,8 +128,8 @@ public class SaleServiceImpl implements SaleService {
             .map(saleMapper::toDto);
     }
     
-	public com.diviso.graeshoppe.avro.TicketLine toAvroTicketLine(TicketLine ticketline) {
-		return com.diviso.graeshoppe.avro.TicketLine.newBuilder()
+	public com.diviso.graeshoppe.avro.TicketLineMessage toAvroTicketLine(TicketLine ticketline) {
+		return com.diviso.graeshoppe.avro.TicketLineMessage.newBuilder()
 				.setPrice(ticketline.getPrice())
 				.setProductId(ticketline.getProductId())
 				.setTotal(ticketline.getTotal()).build();
@@ -139,7 +139,7 @@ public class SaleServiceImpl implements SaleService {
 	public boolean publishMesssage(Long saleId) {
 		Sale sale = saleRepository.findById(saleId).get();
 		sale.setTicketLines(new HashSet<TicketLine>(ticketLineRepository.findBySaleId(saleId)));
-		Builder saleAvro = com.diviso.graeshoppe.avro.Sale.newBuilder()
+		Builder saleAvro = com.diviso.graeshoppe.avro.SaleMessage.newBuilder()
 				.setCustomerId(sale.getCustomerId())
 				.setDate(sale.getDate().toEpochMilli())
 				.setGrandTotal(sale.getGrandTotal())
@@ -148,7 +148,7 @@ public class SaleServiceImpl implements SaleService {
 				.setTicketLines(sale.getTicketLines().stream()
 		  .map(this::toAvroTicketLine).collect(Collectors.toList()));
 		 
-		com.diviso.graeshoppe.avro.Sale message =saleAvro.build();
+		com.diviso.graeshoppe.avro.SaleMessage message =saleAvro.build();
 		
 		log.info("+++++++++++++++++++++++++++++++ completed publish");
 		return messageChannel.saleOut().send(MessageBuilder.withPayload(message).build());

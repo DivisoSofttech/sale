@@ -3,7 +3,7 @@
 	{
 	"namespace":"com.diviso.graeshoppe.avro",
 	"type":"record",
-	"name":"TicketLine",
+	"name":"TicketLineMessage",
 	"fields":[
 		{"name":"productId","type":"long"},
 		{"name":"quantity","type":"int"},
@@ -16,13 +16,13 @@
 	{
 	"namespace":"com.diviso.graeshoppe.avro",
 	"type":"record",
-	"name":"Sale",
+	"name":"SaleMessage",
 	"fields":[
 		{"name":"userId","type":"string"},
 		{"name":"customerId","type":"long"},
 		{"name":"date","type":["null","long"],"logicalType":"date","default": null},
 		{"name":"grandTotal","type":"double"},
-		{"name":"ticketLines","type":{"type":"array","items":"com.diviso.graeshoppe.avro.TicketLine"}}
+		{"name":"ticketLines","type":{"type":"array","items":"com.diviso.graeshoppe.avro.TicketLineMessage"}}
 	]
 	}
 	

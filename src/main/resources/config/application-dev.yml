@@ -54,11 +54,10 @@ spring:
                 output:
                     destination: topic-jhipster
                 sale:
-                    destination: sale
+                    destination: sale-topic
                     contentType: application/*+avro
                     producer:
                        useNativeEncoding: true
-                     
             schemaRegistryClient:
               endpoint: http://dev.servers.divisosofttech.com:8081
             schema:
