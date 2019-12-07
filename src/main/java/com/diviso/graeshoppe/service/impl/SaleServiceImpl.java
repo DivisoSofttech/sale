@@ -69,7 +69,11 @@ public class SaleServiceImpl implements SaleService {
         sale = saleRepository.save(sale);
         SaleDTO result = saleMapper.toDto(sale);
         saleSearchRepository.save(sale);
-        publishMesssage(sale.getId());
+
+        
+        boolean publishstatus=publishMesssage(sale.getId());
+        
+        log.debug("------------------------------------------published"+publishstatus);
         return result;
     }
 
