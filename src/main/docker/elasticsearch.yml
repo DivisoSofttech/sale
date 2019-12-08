@@ -1,9 +1,9 @@
 version: '2'
 services:
-    salemicroservice-elasticsearch:
+    sale-elasticsearch:
         image: elasticsearch:5.6.13
         # volumes:
-        #     - ~/volumes/jhipster/salemicroservice/elasticsearch/:/usr/share/elasticsearch/data/
+        #     - ~/volumes/jhipster/sale/elasticsearch/:/usr/share/elasticsearch/data/
         ports:
             - 9200:9200
             - 9300:9300

@@ -15,32 +15,35 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
-        Added the entity Sale.
+        Added the entity TicketLine.
     -->
-    <changeSet id="20190417045009-1" author="jhipster">
-        <createTable tableName="sale">
+    <changeSet id="20191208054116-1" author="jhipster">
+        <createTable tableName="ticket_line">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="user_id" type="varchar(255)">
+            <column name="product_name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="customer_id" type="bigint">
+            <column name="quantity" type="integer">
                 <constraints nullable="true" />
             </column>
 
-            <column name="jhi_date" type="datetime">
+            <column name="price" type="double">
                 <constraints nullable="true" />
             </column>
 
-            <column name="grand_total" type="double">
+            <column name="total" type="double">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="sale_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="sale" columnName="jhi_date" columnDataType="datetime"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

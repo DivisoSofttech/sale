@@ -14,7 +14,7 @@ USER jhipster
 
 ENTRYPOINT ["./entrypoint.sh"]
 
-EXPOSE 8085 5701/udp
+EXPOSE 8086 5701/udp
 
 ADD *.war app.war
 

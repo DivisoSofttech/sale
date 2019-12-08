@@ -32,7 +32,7 @@ public class SaleResource {
 
     private final Logger log = LoggerFactory.getLogger(SaleResource.class);
 
-    private static final String ENTITY_NAME = "salemicroserviceSale";
+    private static final String ENTITY_NAME = "saleSale";
 
     private final SaleService saleService;
 

@@ -1,6 +1,6 @@
 package com.diviso.graeshoppe.web.rest;
 
-import com.diviso.graeshoppe.SalemicroserviceApp;
+import com.diviso.graeshoppe.SaleApp;
 import com.diviso.graeshoppe.domain.Authority;
 import com.diviso.graeshoppe.domain.User;
 import com.diviso.graeshoppe.repository.UserRepository;
@@ -42,7 +42,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see UserResource
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SalemicroserviceApp.class)
+@SpringBootTest(classes = SaleApp.class)
 public class UserResourceIntTest {
 
     private static final String DEFAULT_LOGIN = "johndoe";

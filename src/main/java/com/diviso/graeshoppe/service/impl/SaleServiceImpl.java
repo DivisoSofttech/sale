@@ -2,29 +2,19 @@ package com.diviso.graeshoppe.service.impl;
 
 import com.diviso.graeshoppe.service.SaleService;
 import com.diviso.graeshoppe.domain.Sale;
-import com.diviso.graeshoppe.domain.TicketLine;
-
 import com.diviso.graeshoppe.repository.SaleRepository;
-import com.diviso.graeshoppe.repository.TicketLineRepository;
 import com.diviso.graeshoppe.repository.search.SaleSearchRepository;
 import com.diviso.graeshoppe.service.dto.SaleDTO;
 import com.diviso.graeshoppe.service.mapper.SaleMapper;
-import com.diviso.graeshoppe.avro.SaleMessage.Builder;
-import com.diviso.graeshoppe.config.MessageBinderConfiguration;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.integration.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -38,22 +28,15 @@ public class SaleServiceImpl implements SaleService {
     private final Logger log = LoggerFactory.getLogger(SaleServiceImpl.class);
 
     private final SaleRepository saleRepository;
-    
-	private final TicketLineRepository ticketLineRepository;
-	
-	@Autowired
-	private MessageBinderConfiguration messageChannel;
 
     private final SaleMapper saleMapper;
 
     private final SaleSearchRepository saleSearchRepository;
 
-    public SaleServiceImpl(SaleRepository saleRepository, SaleMapper saleMapper, 
-    		SaleSearchRepository saleSearchRepository, TicketLineRepository ticketLineRepository) {
+    public SaleServiceImpl(SaleRepository saleRepository, SaleMapper saleMapper, SaleSearchRepository saleSearchRepository) {
         this.saleRepository = saleRepository;
         this.saleMapper = saleMapper;
         this.saleSearchRepository = saleSearchRepository;
-        this.ticketLineRepository = ticketLineRepository;
     }
 
     /**
@@ -69,11 +52,6 @@ public class SaleServiceImpl implements SaleService {
         sale = saleRepository.save(sale);
         SaleDTO result = saleMapper.toDto(sale);
         saleSearchRepository.save(sale);
-
-        
-        boolean publishstatus=publishMesssage(sale.getId());
-        
-        log.debug("------------------------------------------published"+publishstatus);
         return result;
     }
 
@@ -131,32 +109,4 @@ public class SaleServiceImpl implements SaleService {
         return saleSearchRepository.search(queryStringQuery(query), pageable)
             .map(saleMapper::toDto);
     }
-    
-	public com.diviso.graeshoppe.avro.TicketLineMessage toAvroTicketLine(TicketLine ticketline) {
-		return com.diviso.graeshoppe.avro.TicketLineMessage.newBuilder()
-				.setPrice(ticketline.getPrice())
-				.setProductId(ticketline.getProductId())
-				.setTotal(ticketline.getTotal()).build();
-	}
-    
-	@Override
-	public boolean publishMesssage(Long saleId) {
-		Sale sale = saleRepository.findById(saleId).get();
-		sale.setTicketLines(new HashSet<TicketLine>(ticketLineRepository.findBySaleId(saleId)));
-		Builder saleAvro = com.diviso.graeshoppe.avro.SaleMessage.newBuilder()
-				.setCustomerId(sale.getCustomerId())
-				.setDate(sale.getDate().toEpochMilli())
-				.setGrandTotal(sale.getGrandTotal())
-				.setUserId(sale.getUserId())
-		
-				.setTicketLines(sale.getTicketLines().stream()
-		  .map(this::toAvroTicketLine).collect(Collectors.toList()));
-		 
-		com.diviso.graeshoppe.avro.SaleMessage message =saleAvro.build();
-		
-		log.info("+++++++++++++++++++++++++++++++ completed publish");
-		return messageChannel.saleOut().send(MessageBuilder.withPayload(message).build());
-
-	}
-	
 }

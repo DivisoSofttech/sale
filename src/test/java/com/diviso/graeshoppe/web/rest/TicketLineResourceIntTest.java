@@ -1,14 +1,12 @@
 package com.diviso.graeshoppe.web.rest;
 
-import com.diviso.graeshoppe.SalemicroserviceApp;
+import com.diviso.graeshoppe.SaleApp;
 
 import com.diviso.graeshoppe.domain.TicketLine;
 import com.diviso.graeshoppe.repository.TicketLineRepository;
 import com.diviso.graeshoppe.repository.search.TicketLineSearchRepository;
-import com.diviso.graeshoppe.service.SaleService;
 import com.diviso.graeshoppe.service.TicketLineService;
 import com.diviso.graeshoppe.service.dto.TicketLineDTO;
-import com.diviso.graeshoppe.service.mapper.SaleMapper;
 import com.diviso.graeshoppe.service.mapper.TicketLineMapper;
 import com.diviso.graeshoppe.web.rest.errors.ExceptionTranslator;
 
@@ -48,11 +46,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see TicketLineResource
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SalemicroserviceApp.class)
+@SpringBootTest(classes = SaleApp.class)
 public class TicketLineResourceIntTest {
 
-    private static final Long DEFAULT_PRODUCT_ID = 1L;
-    private static final Long UPDATED_PRODUCT_ID = 2L;
+    private static final String DEFAULT_PRODUCT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_PRODUCT_NAME = "BBBBBBBBBB";
 
     private static final Integer DEFAULT_QUANTITY = 1;
     private static final Integer UPDATED_QUANTITY = 2;
@@ -71,10 +69,6 @@ public class TicketLineResourceIntTest {
 
     @Autowired
     private TicketLineService ticketLineService;
-    @Autowired
-    private  SaleMapper saleMapper;
-    @Autowired
-	private  SaleService saleService;
 
     /**
      * This repository is mocked in the com.diviso.graeshoppe.repository.search test package.
@@ -106,7 +100,7 @@ public class TicketLineResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final TicketLineResource ticketLineResource = new TicketLineResource(ticketLineService,saleMapper,saleService);
+        final TicketLineResource ticketLineResource = new TicketLineResource(ticketLineService);
         this.restTicketLineMockMvc = MockMvcBuilders.standaloneSetup(ticketLineResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -123,7 +117,7 @@ public class TicketLineResourceIntTest {
      */
     public static TicketLine createEntity(EntityManager em) {
         TicketLine ticketLine = new TicketLine()
-            .productId(DEFAULT_PRODUCT_ID)
+            .productName(DEFAULT_PRODUCT_NAME)
             .quantity(DEFAULT_QUANTITY)
             .price(DEFAULT_PRICE)
             .total(DEFAULT_TOTAL);
@@ -151,7 +145,7 @@ public class TicketLineResourceIntTest {
         List<TicketLine> ticketLineList = ticketLineRepository.findAll();
         assertThat(ticketLineList).hasSize(databaseSizeBeforeCreate + 1);
         TicketLine testTicketLine = ticketLineList.get(ticketLineList.size() - 1);
-        assertThat(testTicketLine.getProductId()).isEqualTo(DEFAULT_PRODUCT_ID);
+        assertThat(testTicketLine.getProductName()).isEqualTo(DEFAULT_PRODUCT_NAME);
         assertThat(testTicketLine.getQuantity()).isEqualTo(DEFAULT_QUANTITY);
         assertThat(testTicketLine.getPrice()).isEqualTo(DEFAULT_PRICE);
         assertThat(testTicketLine.getTotal()).isEqualTo(DEFAULT_TOTAL);
@@ -194,7 +188,7 @@ public class TicketLineResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(ticketLine.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productId").value(hasItem(DEFAULT_PRODUCT_ID.intValue())))
+            .andExpect(jsonPath("$.[*].productName").value(hasItem(DEFAULT_PRODUCT_NAME.toString())))
             .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY)))
             .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())))
             .andExpect(jsonPath("$.[*].total").value(hasItem(DEFAULT_TOTAL.doubleValue())));
@@ -211,7 +205,7 @@ public class TicketLineResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(ticketLine.getId().intValue()))
-            .andExpect(jsonPath("$.productId").value(DEFAULT_PRODUCT_ID.intValue()))
+            .andExpect(jsonPath("$.productName").value(DEFAULT_PRODUCT_NAME.toString()))
             .andExpect(jsonPath("$.quantity").value(DEFAULT_QUANTITY))
             .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.doubleValue()))
             .andExpect(jsonPath("$.total").value(DEFAULT_TOTAL.doubleValue()));
@@ -238,7 +232,7 @@ public class TicketLineResourceIntTest {
         // Disconnect from session so that the updates on updatedTicketLine are not directly saved in db
         em.detach(updatedTicketLine);
         updatedTicketLine
-            .productId(UPDATED_PRODUCT_ID)
+            .productName(UPDATED_PRODUCT_NAME)
             .quantity(UPDATED_QUANTITY)
             .price(UPDATED_PRICE)
             .total(UPDATED_TOTAL);
@@ -253,7 +247,7 @@ public class TicketLineResourceIntTest {
         List<TicketLine> ticketLineList = ticketLineRepository.findAll();
         assertThat(ticketLineList).hasSize(databaseSizeBeforeUpdate);
         TicketLine testTicketLine = ticketLineList.get(ticketLineList.size() - 1);
-        assertThat(testTicketLine.getProductId()).isEqualTo(UPDATED_PRODUCT_ID);
+        assertThat(testTicketLine.getProductName()).isEqualTo(UPDATED_PRODUCT_NAME);
         assertThat(testTicketLine.getQuantity()).isEqualTo(UPDATED_QUANTITY);
         assertThat(testTicketLine.getPrice()).isEqualTo(UPDATED_PRICE);
         assertThat(testTicketLine.getTotal()).isEqualTo(UPDATED_TOTAL);
@@ -317,7 +311,7 @@ public class TicketLineResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(ticketLine.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productId").value(hasItem(DEFAULT_PRODUCT_ID.intValue())))
+            .andExpect(jsonPath("$.[*].productName").value(hasItem(DEFAULT_PRODUCT_NAME)))
             .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY)))
             .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())))
             .andExpect(jsonPath("$.[*].total").value(hasItem(DEFAULT_TOTAL.doubleValue())));

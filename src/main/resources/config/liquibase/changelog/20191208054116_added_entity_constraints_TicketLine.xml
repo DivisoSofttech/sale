@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity TicketLine.
     -->
-    <changeSet id="20190417045010-2" author="jhipster">
+    <changeSet id="20191208054116-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="sale_id"
                                  baseTableName="ticket_line"

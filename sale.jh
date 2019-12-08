@@ -1,11 +1,15 @@
 entity Sale{
-userId String,
+saleUniqueId String,
+idpCode String,
+storeName String,
 customerId Long,
 date Instant,
+paymentRef String,
+paymentMode String,
 grandTotal Double
 } 
 entity TicketLine{
-productId Long,
+productName String,
 quantity Integer,
 price Double,
 total Double

@@ -1,6 +1,6 @@
 package com.diviso.graeshoppe.config.timezone;
 
-import com.diviso.graeshoppe.SalemicroserviceApp;
+import com.diviso.graeshoppe.SaleApp;
 import com.diviso.graeshoppe.repository.timezone.DateTimeWrapper;
 import com.diviso.graeshoppe.repository.timezone.DateTimeWrapperRepository;
 import org.junit.Before;
@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Unit tests for the UTC Hibernate configuration.
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SalemicroserviceApp.class)
+@SpringBootTest(classes = SaleApp.class)
 public class HibernateTimeZoneTest {
 
     @Autowired

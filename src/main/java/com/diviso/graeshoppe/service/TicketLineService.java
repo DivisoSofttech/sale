@@ -1,11 +1,9 @@
 package com.diviso.graeshoppe.service;
 
-import com.diviso.graeshoppe.domain.TicketLine;
 import com.diviso.graeshoppe.service.dto.TicketLineDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -56,6 +54,6 @@ public interface TicketLineService {
      * @return the list of entities
      */
     Page<TicketLineDTO> search(String query, Pageable pageable);
-    
-    List<TicketLineDTO> findBySaleId(Long saleId);
+
+	List<TicketLineDTO> findBySaleId(Long saleId);
 }

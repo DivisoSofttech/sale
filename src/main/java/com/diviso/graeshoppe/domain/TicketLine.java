@@ -2,6 +2,8 @@ package com.diviso.graeshoppe.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
@@ -14,6 +16,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "ticket_line")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "ticketline")
 public class TicketLine implements Serializable {
 
@@ -23,8 +26,8 @@ public class TicketLine implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "product_id")
-    private Long productId;
+    @Column(name = "product_name")
+    private String productName;
 
     @Column(name = "quantity")
     private Integer quantity;
@@ -48,17 +51,17 @@ public class TicketLine implements Serializable {
         this.id = id;
     }
 
-    public Long getProductId() {
-        return productId;
+    public String getProductName() {
+        return productName;
     }
 
-    public TicketLine productId(Long productId) {
-        this.productId = productId;
+    public TicketLine productName(String productName) {
+        this.productName = productName;
         return this;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public Integer getQuantity() {
@@ -92,12 +95,12 @@ public class TicketLine implements Serializable {
     }
 
     public TicketLine total(Double total) {
-        this.total =  price*quantity;
+        this.total = total;
         return this;
     }
 
     public void setTotal(Double total) {
-        this.total = price*quantity;
+        this.total = total;
     }
 
     public Sale getSale() {
@@ -138,7 +141,7 @@ public class TicketLine implements Serializable {
     public String toString() {
         return "TicketLine{" +
             "id=" + getId() +
-            ", productId=" + getProductId() +
+            ", productName='" + getProductName() + "'" +
             ", quantity=" + getQuantity() +
             ", price=" + getPrice() +
             ", total=" + getTotal() +

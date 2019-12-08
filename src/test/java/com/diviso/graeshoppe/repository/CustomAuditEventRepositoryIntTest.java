@@ -1,6 +1,6 @@
 package com.diviso.graeshoppe.repository;
 
-import com.diviso.graeshoppe.SalemicroserviceApp;
+import com.diviso.graeshoppe.SaleApp;
 import com.diviso.graeshoppe.config.Constants;
 import com.diviso.graeshoppe.config.audit.AuditEventConverter;
 import com.diviso.graeshoppe.domain.PersistentAuditEvent;
@@ -31,7 +31,7 @@ import static com.diviso.graeshoppe.repository.CustomAuditEventRepository.EVENT_
  * @see CustomAuditEventRepository
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SalemicroserviceApp.class)
+@SpringBootTest(classes = SaleApp.class)
 @Transactional
 public class CustomAuditEventRepositoryIntTest {
 

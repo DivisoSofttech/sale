@@ -2,6 +2,8 @@ package com.diviso.graeshoppe.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
@@ -17,6 +19,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "sale")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "sale")
 public class Sale implements Serializable {
 
@@ -26,8 +29,14 @@ public class Sale implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id")
-    private String userId;
+    @Column(name = "sale_unique_id")
+    private String saleUniqueId;
+
+    @Column(name = "idp_code")
+    private String idpCode;
+
+    @Column(name = "store_name")
+    private String storeName;
 
     @Column(name = "customer_id")
     private Long customerId;
@@ -35,10 +44,17 @@ public class Sale implements Serializable {
     @Column(name = "jhi_date")
     private Instant date;
 
+    @Column(name = "payment_ref")
+    private String paymentRef;
+
+    @Column(name = "payment_mode")
+    private String paymentMode;
+
     @Column(name = "grand_total")
     private Double grandTotal;
 
     @OneToMany(mappedBy = "sale")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<TicketLine> ticketLines = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -49,17 +65,43 @@ public class Sale implements Serializable {
         this.id = id;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getSaleUniqueId() {
+        return saleUniqueId;
     }
 
-    public Sale userId(String userId) {
-        this.userId = userId;
+    public Sale saleUniqueId(String saleUniqueId) {
+        this.saleUniqueId = saleUniqueId;
         return this;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setSaleUniqueId(String saleUniqueId) {
+        this.saleUniqueId = saleUniqueId;
+    }
+
+    public String getIdpCode() {
+        return idpCode;
+    }
+
+    public Sale idpCode(String idpCode) {
+        this.idpCode = idpCode;
+        return this;
+    }
+
+    public void setIdpCode(String idpCode) {
+        this.idpCode = idpCode;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public Sale storeName(String storeName) {
+        this.storeName = storeName;
+        return this;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
     }
 
     public Long getCustomerId() {
@@ -86,6 +128,32 @@ public class Sale implements Serializable {
 
     public void setDate(Instant date) {
         this.date = date;
+    }
+
+    public String getPaymentRef() {
+        return paymentRef;
+    }
+
+    public Sale paymentRef(String paymentRef) {
+        this.paymentRef = paymentRef;
+        return this;
+    }
+
+    public void setPaymentRef(String paymentRef) {
+        this.paymentRef = paymentRef;
+    }
+
+    public String getPaymentMode() {
+        return paymentMode;
+    }
+
+    public Sale paymentMode(String paymentMode) {
+        this.paymentMode = paymentMode;
+        return this;
+    }
+
+    public void setPaymentMode(String paymentMode) {
+        this.paymentMode = paymentMode;
     }
 
     public Double getGrandTotal() {
@@ -151,9 +219,13 @@ public class Sale implements Serializable {
     public String toString() {
         return "Sale{" +
             "id=" + getId() +
-            ", userId='" + getUserId() + "'" +
+            ", saleUniqueId='" + getSaleUniqueId() + "'" +
+            ", idpCode='" + getIdpCode() + "'" +
+            ", storeName='" + getStoreName() + "'" +
             ", customerId=" + getCustomerId() +
             ", date='" + getDate() + "'" +
+            ", paymentRef='" + getPaymentRef() + "'" +
+            ", paymentMode='" + getPaymentMode() + "'" +
             ", grandTotal=" + getGrandTotal() +
             "}";
     }

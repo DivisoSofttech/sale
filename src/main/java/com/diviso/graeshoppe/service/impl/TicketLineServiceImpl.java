@@ -110,7 +110,7 @@ public class TicketLineServiceImpl implements TicketLineService {
         return ticketLineSearchRepository.search(queryStringQuery(query), pageable)
             .map(ticketLineMapper::toDto);
     }
-
+    
 	/* (non-Javadoc)
 	 * @see com.diviso.graeshoppe.service.TicketLineService#findBySaleId(java.lang.Long)
 	 */

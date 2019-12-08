@@ -9,7 +9,7 @@ public class TicketLineDTO implements Serializable {
 
     private Long id;
 
-    private Long productId;
+    private String productName;
 
     private Integer quantity;
 
@@ -28,12 +28,12 @@ public class TicketLineDTO implements Serializable {
         this.id = id;
     }
 
-    public Long getProductId() {
-        return productId;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public Integer getQuantity() {
@@ -57,7 +57,7 @@ public class TicketLineDTO implements Serializable {
     }
 
     public void setTotal(Double total) {
-        this.total = getPrice()*getQuantity();
+        this.total = total;
     }
 
     public Long getSaleId() {
@@ -93,7 +93,7 @@ public class TicketLineDTO implements Serializable {
     public String toString() {
         return "TicketLineDTO{" +
             "id=" + getId() +
-            ", productId=" + getProductId() +
+            ", productName='" + getProductName() + "'" +
             ", quantity=" + getQuantity() +
             ", price=" + getPrice() +
             ", total=" + getTotal() +

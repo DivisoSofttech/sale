@@ -1,7 +1,7 @@
 {
-    "name": "salemicroservice",
+    "name": "sale",
     "version": "0.0.0",
-    "description": "Description for salemicroservice",
+    "description": "Description for sale",
     "private": true,
     "license": "UNLICENSED",
     "cacheDirectories": [

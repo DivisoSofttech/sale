@@ -24,18 +24,18 @@ import java.util.Collection;
 @SpringBootApplication
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
 @EnableDiscoveryClient
-public class SalemicroserviceApp {
+public class SaleApp {
 
-    private static final Logger log = LoggerFactory.getLogger(SalemicroserviceApp.class);
+    private static final Logger log = LoggerFactory.getLogger(SaleApp.class);
 
     private final Environment env;
 
-    public SalemicroserviceApp(Environment env) {
+    public SaleApp(Environment env) {
         this.env = env;
     }
 
     /**
-     * Initializes salemicroservice.
+     * Initializes sale.
      * <p>
      * Spring profiles can be configured with a program argument --spring.profiles.active=your-active-profile
      * <p>
@@ -60,7 +60,7 @@ public class SalemicroserviceApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(SalemicroserviceApp.class);
+        SpringApplication app = new SpringApplication(SaleApp.class);
         DefaultProfileUtil.addDefaultProfile(app);
         Environment env = app.run(args).getEnvironment();
         logApplicationStartup(env);

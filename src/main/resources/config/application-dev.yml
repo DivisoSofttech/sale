@@ -24,7 +24,7 @@ eureka:
         prefer-ip-address: true
     client:
         service-url:
-            defaultZone: https://admin:${jhipster.registry.password}@lxi-registry-server.herokuapp.com/eureka/
+            defaultZone: http://admin:${jhipster.registry.password}@localhost:8761/eureka/
         enabled: false
 spring:
     profiles:
@@ -41,32 +41,9 @@ spring:
     jackson:
         serialization:
             indent-output: true
-    cloud:
-        stream:
-            kafka:
-                binder:
-                    brokers: dev.servers.divisosofttech.com
-                    zk-nodes: dev.servers.divisosofttech.com
-                    configuration:
-                       key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-                       value.serializer: com.diviso.graeshoppe.config.SerdeConfig
-            bindings:
-                output:
-                    destination: topic-jhipster
-                sale:
-                    destination: sale-topic
-                    contentType: application/*+avro
-                    producer:
-                       useNativeEncoding: true
-            schemaRegistryClient:
-              endpoint: http://dev.servers.divisosofttech.com:8081
-            schema:
-              avro:
-                schema-locations: classpath:avro/sale.avsc
-
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/salemicroservice?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
+        url: jdbc:mysql://localhost:3306/sale?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
         username: root
         password: root
         hikari:
@@ -84,9 +61,13 @@ spring:
         properties:
             hibernate.id.new_generator_mappings: true
             hibernate.connection.provider_disables_autocommit: true
-            hibernate.cache.use_second_level_cache: false
+            hibernate.cache.use_second_level_cache: true
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
+            hibernate.cache.region.factory_class: com.hazelcast.hibernate.HazelcastCacheRegionFactory
+            hibernate.cache.hazelcast.instance_name: sale
+            hibernate.cache.use_minimal_puts: true
+            hibernate.cache.hazelcast.use_lite_member: true
     data:
         elasticsearch:
            cluster-name: 20a60de2fab94b1b9aca60bcfee1591b
@@ -102,7 +83,6 @@ spring:
            readTimeout: 10000
 
            uri: https://20a60de2fab94b1b9aca60bcfee1591b.us-central1.gcp.cloud.es.io:9243
-
     liquibase:
         contexts: dev
     mail:
@@ -154,8 +134,8 @@ jhipster:
         # allow-credentials: true
         # max-age: 1800
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: salemicroservice@localhost
-        base-url: http://127.0.0.1:8085
+        from: sale@localhost
+        base-url: http://127.0.0.1:8086
     metrics:
         logs: # Reports metrics in the logs
             enabled: false

@@ -1,6 +1,6 @@
 package com.diviso.graeshoppe.service;
 
-import com.diviso.graeshoppe.SalemicroserviceApp;
+import com.diviso.graeshoppe.SaleApp;
 import com.diviso.graeshoppe.config.Constants;
 import com.diviso.graeshoppe.domain.User;
 import com.diviso.graeshoppe.repository.search.UserSearchRepository;
@@ -46,7 +46,7 @@ import static org.mockito.Mockito.when;
  * @see UserService
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SalemicroserviceApp.class)
+@SpringBootTest(classes = SaleApp.class)
 @Transactional
 public class UserServiceIntTest {
 

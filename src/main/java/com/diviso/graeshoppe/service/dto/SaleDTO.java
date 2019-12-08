@@ -10,11 +10,19 @@ public class SaleDTO implements Serializable {
 
     private Long id;
 
-    private String userId;
+    private String saleUniqueId;
+
+    private String idpCode;
+
+    private String storeName;
 
     private Long customerId;
 
     private Instant date;
+
+    private String paymentRef;
+
+    private String paymentMode;
 
     private Double grandTotal;
 
@@ -27,12 +35,28 @@ public class SaleDTO implements Serializable {
         this.id = id;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getSaleUniqueId() {
+        return saleUniqueId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setSaleUniqueId(String saleUniqueId) {
+        this.saleUniqueId = saleUniqueId;
+    }
+
+    public String getIdpCode() {
+        return idpCode;
+    }
+
+    public void setIdpCode(String idpCode) {
+        this.idpCode = idpCode;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
     }
 
     public Long getCustomerId() {
@@ -49,6 +73,22 @@ public class SaleDTO implements Serializable {
 
     public void setDate(Instant date) {
         this.date = date;
+    }
+
+    public String getPaymentRef() {
+        return paymentRef;
+    }
+
+    public void setPaymentRef(String paymentRef) {
+        this.paymentRef = paymentRef;
+    }
+
+    public String getPaymentMode() {
+        return paymentMode;
+    }
+
+    public void setPaymentMode(String paymentMode) {
+        this.paymentMode = paymentMode;
     }
 
     public Double getGrandTotal() {
@@ -84,9 +124,13 @@ public class SaleDTO implements Serializable {
     public String toString() {
         return "SaleDTO{" +
             "id=" + getId() +
-            ", userId='" + getUserId() + "'" +
+            ", saleUniqueId='" + getSaleUniqueId() + "'" +
+            ", idpCode='" + getIdpCode() + "'" +
+            ", storeName='" + getStoreName() + "'" +
             ", customerId=" + getCustomerId() +
             ", date='" + getDate() + "'" +
+            ", paymentRef='" + getPaymentRef() + "'" +
+            ", paymentMode='" + getPaymentMode() + "'" +
             ", grandTotal=" + getGrandTotal() +
             "}";
     }
