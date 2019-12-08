@@ -2,6 +2,8 @@ package com.diviso.graeshoppe.service;
 
 import com.diviso.graeshoppe.service.dto.SaleDTO;
 
+import net.sf.jasperreports.engine.JRException;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -53,4 +55,16 @@ public interface SaleService {
      * @return the list of entities
      */
     Page<SaleDTO> search(String query, Pageable pageable);
+
+    
+    /**
+    * Get the sale report as pdf
+    *
+    * @param idpCode the idp code of the entity
+    * @param saleId the id of the entity
+    * @return the byte[]
+    */
+	
+
+	byte[] getSaleReportAsPdf(Long saleId, String idpCode)throws JRException;
 }

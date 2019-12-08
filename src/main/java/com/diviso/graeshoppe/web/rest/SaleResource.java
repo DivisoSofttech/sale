@@ -147,6 +147,15 @@ public class SaleResource {
 			log.debug("REST request to get a pdf of sale");
 
 			byte[] pdfContents = null;
+			
+			 try
+		      {
+		        pdfContents=saleService.getSaleReportAsPdf(saleId, idpCode);
+		      }
+		      catch (JRException e) {
+		           e.printStackTrace();
+		      }
+		     
 
 	
 			HttpHeaders headers = new HttpHeaders();

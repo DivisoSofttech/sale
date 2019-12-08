@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sale" pageWidth="170" pageHeight="842" columnWidth="130" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" isIgnorePagination="true" uuid="c6305356-51b3-4c03-afcb-38c73ffedc9f">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="289"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="706"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<parameter name="idp_code" class="java.lang.String"/>
+	<parameter name="id" class="java.lang.Long"/>
+	<queryString language="SQL">
+		<![CDATA[select * from sale, ticket_line where sale.id=ticket_line.sale_id and sale.idp_code= $P{idp_code} and sale.id= $P{id} ]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sale"/>
+	</field>
+	<field name="sale_unique_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sale_unique_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sale"/>
+	</field>
+	<field name="idp_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="idp_code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sale"/>
+	</field>
+	<field name="store_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="store_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sale"/>
+	</field>
+	<field name="customer_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="customer_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sale"/>
+	</field>
+	<field name="jhi_date" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="jhi_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sale"/>
+	</field>
+	<field name="payment_ref" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="payment_ref"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sale"/>
+	</field>
+	<field name="payment_mode" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="payment_mode"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sale"/>
+	</field>
+	<field name="grand_total" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="grand_total"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sale"/>
+	</field>
+	<field name="product_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="product_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ticket_line"/>
+	</field>
+	<field name="quantity" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="quantity"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ticket_line"/>
+	</field>
+	<field name="price" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="price"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ticket_line"/>
+	</field>
+	<field name="total" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="total"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ticket_line"/>
+	</field>
+	<field name="sale_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="sale_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ticket_line"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="148" splitType="Stretch">
+			<textField>
+				<reportElement positionType="Float" x="12" y="22" width="100" height="25" uuid="a17bcb85-1e7e-45d8-acd1-1b71724715a6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{store_name}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="95" y="128" width="44" height="20" uuid="60c815a2-9c17-4ac4-8b57-a0072a5fd52e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["EUR"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" x="-19" y="54" width="168" height="1" uuid="3b0eee5f-3d91-4d03-9fb9-c4f0e83269c7"/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="-19" y="127" width="169" height="1" uuid="bf3d6596-c1e6-4192-b050-b8e8eddcd18a"/>
+			</line>
+			<textField>
+				<reportElement x="-4" y="64" width="88" height="17" uuid="581910c0-ae79-4852-ad65-3f683b0b0a68"/>
+				<textFieldExpression><![CDATA["Customer id:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="100" y="64" width="30" height="17" uuid="b28b730a-7fb5-4bb9-99ef-d72f39b85966"/>
+				<textFieldExpression><![CDATA[$F{customer_id}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="-4" y="85" width="98" height="16" uuid="21236103-b5f8-45bb-bab4-c73d6a1eb5e9"/>
+				<textFieldExpression><![CDATA["Sale invoice num:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="85" width="31" height="16" uuid="e6b963c9-8b5d-4430-86e3-e9b5172a2fb6"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="106" width="79" height="15" uuid="f421104d-721b-40eb-8534-b2199433d448"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{jhi_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="-4" y="106" width="54" height="15" uuid="2761ebdc-936b-4639-9c00-e0dd954900c2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Date  :"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="12" y="0" width="132" height="22" uuid="d667b9e0-1b48-4625-9518-cec34695858c"/>
+				<imageExpression><![CDATA["Graeshoppelogoforreport.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="19" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="-19" y="5" width="120" height="14" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="c8e5af49-d601-493b-b3b8-f66636ef7dcf"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[String.format("%1$2s x %2$s  %3$s", $F{quantity}, $F{product_name}, $F{price})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="106" y="6" width="36" height="13" uuid="3a876604-73c6-443e-9332-55c856320325"/>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="69" splitType="Stretch">
+			<textField>
+				<reportElement positionType="Float" x="-11" y="33" width="151" height="16" uuid="a26ff879-1e2c-4379-b847-fed6623f5532"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Powered by Graeshoppe"]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement positionType="Float" x="62" y="47" width="80" height="22" uuid="978ca3ed-6a20-4654-8a4a-15c6d2b503b9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMM d, yyyy">
+				<reportElement positionType="Float" x="-9" y="47" width="101" height="22" uuid="57215ccf-5736-4357-8a9c-18344bba15fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="-6" y="7" width="89" height="15" uuid="e0f0deb8-37bb-4b0a-a61a-6e133092d194"/>
+				<textFieldExpression><![CDATA["Grand Total:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="103" y="7" width="29" height="15" uuid="4fbd8133-dbf5-41a5-935d-2afca37ece93"/>
+				<textFieldExpression><![CDATA[$F{grand_total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="90" y="4" width="48" height="1" uuid="284dbd4a-b724-4af4-9911-b131625a9a2c"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

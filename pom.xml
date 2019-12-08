@@ -873,6 +873,11 @@
 				should hot reload automatically! -->
 			<id>cc</id>
 			<dependencies>
+			<dependency>
+			<groupId>io.undertow</groupId>
+			<artifactId>undertow-core</artifactId>
+			<scope>compile</scope>
+		</dependency>
 				<dependency>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-undertow</artifactId>

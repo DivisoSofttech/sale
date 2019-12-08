@@ -6,15 +6,29 @@ import com.diviso.graeshoppe.repository.SaleRepository;
 import com.diviso.graeshoppe.repository.search.SaleSearchRepository;
 import com.diviso.graeshoppe.service.dto.SaleDTO;
 import com.diviso.graeshoppe.service.mapper.SaleMapper;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+
+import javax.sql.DataSource;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -24,7 +38,9 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 @Service
 @Transactional
 public class SaleServiceImpl implements SaleService {
-
+	
+	@Autowired
+    DataSource dataSource;
     private final Logger log = LoggerFactory.getLogger(SaleServiceImpl.class);
 
     private final SaleRepository saleRepository;
@@ -109,4 +125,24 @@ public class SaleServiceImpl implements SaleService {
         return saleSearchRepository.search(queryStringQuery(query), pageable)
             .map(saleMapper::toDto);
     }
-}
+
+	
+
+	@Override
+	public byte[] getSaleReportAsPdf(Long saleId, String idpCode) throws JRException {
+		JasperReport jr = JasperCompileManager.compileReport("src/main/resources/report/sale.jrxml");
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("idp_code", idpCode);
+		parameters.put("id",saleId);
+				Connection conn = null;
+		try {
+			conn = dataSource.getConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		JasperPrint jp = JasperFillManager.fillReport(jr, parameters, conn);
+		return JasperExportManager.exportReportToPdf(jp);
+	}
+	}
