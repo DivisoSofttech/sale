@@ -8,7 +8,7 @@
 	<parameter name="idp_code" class="java.lang.String"/>
 	<parameter name="id" class="java.lang.Long"/>
 	<queryString language="SQL">
-		<![CDATA[select * from sale, ticket_line where sale.id=ticket_line.sale_id and sale.idp_code= $P{idp_code} and sale.id= $P{id} ]]>
+		<![CDATA[select * from sale, ticket_line where sale.id=ticket_line.sale_id and sale.idp_code= $P{idp_code} and sale.id= $P{id}]]>
 	</queryString>
 	<field name="id" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.label" value="id"/>
@@ -72,7 +72,7 @@
 	<title>
 		<band height="148" splitType="Stretch">
 			<textField>
-				<reportElement positionType="Float" x="12" y="22" width="100" height="25" uuid="a17bcb85-1e7e-45d8-acd1-1b71724715a6"/>
+				<reportElement positionType="Float" x="20" y="22" width="100" height="25" uuid="a17bcb85-1e7e-45d8-acd1-1b71724715a6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
@@ -96,7 +96,7 @@
 				<textFieldExpression><![CDATA["Customer id:"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="100" y="64" width="30" height="17" uuid="b28b730a-7fb5-4bb9-99ef-d72f39b85966"/>
+				<reportElement positionType="Float" x="65" y="64" width="30" height="17" uuid="b28b730a-7fb5-4bb9-99ef-d72f39b85966"/>
 				<textFieldExpression><![CDATA[$F{customer_id}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
@@ -104,11 +104,11 @@
 				<textFieldExpression><![CDATA["Sale invoice num:"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="100" y="85" width="31" height="16" uuid="e6b963c9-8b5d-4430-86e3-e9b5172a2fb6"/>
+				<reportElement x="89" y="85" width="31" height="16" uuid="e6b963c9-8b5d-4430-86e3-e9b5172a2fb6"/>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="60" y="106" width="79" height="15" uuid="f421104d-721b-40eb-8534-b2199433d448"/>
+				<reportElement x="35" y="106" width="79" height="15" uuid="f421104d-721b-40eb-8534-b2199433d448"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{jhi_date}]]></textFieldExpression>
 			</textField>
@@ -118,7 +118,7 @@
 				<textFieldExpression><![CDATA["Date  :"]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="12" y="0" width="132" height="22" uuid="d667b9e0-1b48-4625-9518-cec34695858c"/>
+				<reportElement x="12" y="0" width="108" height="22" uuid="d667b9e0-1b48-4625-9518-cec34695858c"/>
 				<imageExpression><![CDATA["Graeshoppelogoforreport.png"]]></imageExpression>
 			</image>
 		</band>
@@ -132,12 +132,12 @@
 	<detail>
 		<band height="19" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" isPrintRepeatedValues="false" x="-19" y="5" width="120" height="14" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="c8e5af49-d601-493b-b3b8-f66636ef7dcf"/>
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="-15" y="5" width="120" height="14" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="c8e5af49-d601-493b-b3b8-f66636ef7dcf"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[String.format("%1$2s x %2$s  %3$s", $F{quantity}, $F{product_name}, $F{price})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="106" y="6" width="36" height="13" uuid="3a876604-73c6-443e-9332-55c856320325"/>
+				<reportElement x="106" y="6" width="33" height="13" uuid="3a876604-73c6-443e-9332-55c856320325"/>
 				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -149,38 +149,38 @@
 		<band splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="69" splitType="Stretch">
+		<band height="109" splitType="Stretch">
 			<textField>
-				<reportElement positionType="Float" x="-11" y="33" width="151" height="16" uuid="a26ff879-1e2c-4379-b847-fed6623f5532"/>
+				<reportElement positionType="Float" x="-11" y="63" width="151" height="16" uuid="a26ff879-1e2c-4379-b847-fed6623f5532"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Powered by Graeshoppe"]]></textFieldExpression>
 			</textField>
 			<textField pattern="HH:mm">
-				<reportElement positionType="Float" x="62" y="47" width="80" height="22" uuid="978ca3ed-6a20-4654-8a4a-15c6d2b503b9"/>
+				<reportElement positionType="Float" x="50" y="79" width="80" height="22" uuid="978ca3ed-6a20-4654-8a4a-15c6d2b503b9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField pattern="MMM d, yyyy">
-				<reportElement positionType="Float" x="-9" y="47" width="101" height="22" uuid="57215ccf-5736-4357-8a9c-18344bba15fc"/>
+				<reportElement positionType="Float" x="-9" y="79" width="101" height="22" uuid="57215ccf-5736-4357-8a9c-18344bba15fc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="-6" y="7" width="89" height="15" uuid="e0f0deb8-37bb-4b0a-a61a-6e133092d194"/>
+				<reportElement positionType="Float" x="-6" y="33" width="89" height="15" uuid="e0f0deb8-37bb-4b0a-a61a-6e133092d194"/>
 				<textFieldExpression><![CDATA["Grand Total:"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="103" y="7" width="29" height="15" uuid="4fbd8133-dbf5-41a5-935d-2afca37ece93"/>
+				<reportElement x="106" y="33" width="33" height="15" uuid="4fbd8133-dbf5-41a5-935d-2afca37ece93"/>
 				<textFieldExpression><![CDATA[$F{grand_total}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="90" y="4" width="48" height="1" uuid="284dbd4a-b724-4af4-9911-b131625a9a2c"/>
+				<reportElement x="95" y="25" width="50" height="1" uuid="284dbd4a-b724-4af4-9911-b131625a9a2c"/>
 			</line>
 		</band>
 	</summary>
