@@ -53,6 +53,15 @@ public class TicketLineServiceImpl implements TicketLineService {
         ticketLine = ticketLineRepository.save(ticketLine);
         TicketLineDTO result = ticketLineMapper.toDto(ticketLine);
         ticketLineSearchRepository.save(ticketLine);
+        return updateToEs(result);
+    }
+    
+    private TicketLineDTO updateToEs(TicketLineDTO ticketLineDTO) {
+        log.debug("Request to save TicketLine : {}", ticketLineDTO);
+        TicketLine ticketLine = ticketLineMapper.toEntity(ticketLineDTO);
+        ticketLine = ticketLineRepository.save(ticketLine);
+        TicketLineDTO result = ticketLineMapper.toDto(ticketLine);
+        ticketLineSearchRepository.save(ticketLine);
         return result;
     }
 
